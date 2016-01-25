@@ -115,3 +115,9 @@ post '/projects/:id/add_employee' do
   employee.update({project_id: params[:id].to_i})
   redirect "/projects/#{params[:id].to_i}"
 end
+
+delete '/projects/:id/remove_employee' do
+  employee = Employee.find(params[:employee_id].to_i)
+  employee.update({project_id: nil})
+  redirect "/projects/#{params[:id].to_i}"
+end
