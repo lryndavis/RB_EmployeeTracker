@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel">
+      <h1><%= @employee.name() %></h1>
+      <% if !@division.nil? %>
+        <h3>Division: <a href="/divisions/<%= @division.id %>"><%= @division.name %></a></h3>
+      <% end %>
+      <% if !@project.nil? %>
+        <h3>Project: <a href="/projects/<%= @project.id %>"><%= @project.name %></a></h3>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <h3>Update Info</h3>
+  <form class="" action="/employees/<%= @employee.id %>/update" method="post">
+    <input type="hidden" value="patch" name="_method">
+    <label for="employee_name">Name</label>
+    <input type="text" name="employee_name">
+    <select name="division" class="form-control">
+      <% @divisions.each do |division| %>
+        <% if division.id == @employee.division_id %>
+          <option value="<%= division.id %>" selected><%= division.name %></option>
+        <% else %>
+          <option value="<%= division.id %>"><%= division.name %></option>
+        <% end %>
+      <% end %>
+    </select>
+    <select name="project" class="form-control">
+      <% @projects.each do |project| %>
+        <% if project.id == @employee.project_id %>
+          <option value="<%= project.id %>" selected><%= project.name %></option>
+        <% else %>
+          <option value="<%= project.id %>"><%= project.name %></option>
+        <% end %>
+      <% end %>
+    </select>
+    <button type="submit">Update employee</button>
+  </form>
+</div>

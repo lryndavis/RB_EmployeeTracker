@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel">
+      <h1><%= @project.name() %></h1>
+      <% if !@employees.nil? %>
+        <h2>Employees</h2>
+        <hr />
+        <% @employees.each do |employee| %>
+          <h3><a href="/employees/<%= employee.id %>"><%= employee.name %></a></h3>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <div class="panel">
+      <h3>Available Employees</h3>
+      <% @available_employees.each do |employee| %>
+        <% if employee.project_id.nil? %>
+          <h4><%= employee.name %></h4>
+          <form action="/projects/<%= @project.id %>/add_employee" method="post">
+            <input type="hidden" name="employee_id" value="<%= employee.id %>">
+            <button class="btn btn-default" type="submit">Add To Project</button>
+          </form>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<form class="" action="/projects/<%= @project.id %>/update" method="post">
+  <input type="hidden" value="patch" name="_method">
+  <input type="hidden" name = "id" value ="<%= @project.id %>">
+  <input type="text" name="project_name" required>
+  <button type="submit">Update project</button>
+</form>
