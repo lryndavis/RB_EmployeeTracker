@@ -76,7 +76,7 @@ patch '/divisions/:id/update' do
   erb :project
 end
 
-delete '/diivisions/:id/delete' do
+delete '/divisions/:id/delete' do
   id = params[:id].to_i
   Division.delete(id)
   redirect '/'
